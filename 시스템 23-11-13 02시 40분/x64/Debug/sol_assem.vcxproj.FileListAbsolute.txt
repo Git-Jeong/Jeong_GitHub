@@ -2,3 +2,4 @@ C:\Users\JeongJin\Desktop\솔플 시스템 - 23년 11월 11일 오전 2시 40분
 C:\Users\JeongJin\Desktop\솔플 시스템 - 23년 11월 11일  22시 40분\x64\Debug\sol_assem.exe
 C:\Users\JeongJin\Desktop\솔플 시스템 - 23년 11월 12일  16시 40분\x64\Debug\sol_assem.exe
 C:\Users\JeongJin\Desktop\시스템 23-11-12\x64\Debug\sol_assem.exe
+C:\Users\JeongJin\Documents\GitHub\JeongJin_GitHub\시스템 23-11-13 02시 40분\x64\Debug\sol_assem.exe
