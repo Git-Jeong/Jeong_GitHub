@@ -1,0 +1,17 @@
+String		Format	OP
+
+CLEAR     	2 	B4
+COMP      	3 	28
+COMPR     	2 	A0
+J         	3 	3C
+JEQ       	3 	30
+JLT       	3 	38
+LDA       	3 	00
+LDT       	3 	74
+RD        	3 	D8
+RSUB      	3 	4C
+STA       	3 	0C
+STL       	3 	14
+TD        	3 	E0
+TIXR      	2 	B8
+WD        	3 	DC

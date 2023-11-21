@@ -57,26 +57,13 @@ struct symbol_unit
 	uchar symbol[10];
 	int addr;
 };
-
 typedef struct symbol_unit symbol;
 symbol sym_table[MAX_LINES];
-
 static int locctr;
 
 
-// optable 구조체 정의 - 필
-struct optable_unit
-{
-	uchar str[10];
-	int op;
-	int format;
-};
-
-typedef struct optable_unit optable_entry;
-optable_entry optable[MAX_INST];
 
 //--------------
-int countDigits(int);
 static uchar *input_file;
 static uchar *output_file;
 int init_my_assembler(void);
@@ -86,7 +73,6 @@ int token_parsing(uchar *str);
 int search_opcode(uchar *str);
 static int assem_pass1(void);
 void make_opcode_output(uchar *file_name);
-
-void make_symtab_output(uchar *file_name);
+void make_symtab_output(uchar* symboltable_txt);
 static int assem_pass2(void);
 void make_objectcode_output(uchar *file_name);
