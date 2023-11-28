@@ -1,0 +1,18 @@
+Line		Symbol		locctr
+--------------------------------------
+
+[01]		FIRST		0000
+[02]		CLOOP		0003
+[03]		ENDFIL		0017
+[04]		RETADR		002A
+[05]		LENGTH		002D
+[06]		BUFFER		0033
+[07]		BUFEND		1033
+[08]		MAXLEN		1036
+[09]		RDREC		1039
+[10]		RLOOP		104B
+[11]		EXIT		1064
+[12]		INPUT		106B
+[13]		MAXLEN		106E
+[14]		WRREC		1071
+[15]		WLOOP		107E
