@@ -4,7 +4,8 @@
 
 
     아직 이번 학기의 과제 제출기간이 마감되지도 않았다 보니 해당 코드에서 중요한 부분들을 전부 삭제 해뒀습니다.
-
+    
+    현재 미공개된 코드의 경우 pass1은 끝났고, pass2에서 object code 뽑는 중.
 
 */
 #define _CRT_SECURE_NO_WARNINGS	
