@@ -10,14 +10,12 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include "my_assembler_20194380.h"
-//#include "Operation_status.h"   
-//내가 어디까지 작업을 했는지 나타내는 파일로 어셈블러의 역할과는 무관
 
 int main(void) {
     init_my_assembler();
     assem_pass1();
     assem_pass2();
-    token_test();      //token_parsing, locctr, object_code를 전체적으로 테스트 돌리는 함수.
+    //token_test();      //token_parsing, locctr, object_code를 전체적으로 테스트 돌리는 함수.
     //literal_test();      //리터럴 테이블 테스트 함수.
 }
 
@@ -91,7 +89,7 @@ int init_inst_file(uchar* inst_file) {
 * 설명 : token_table 구현을 위해 input_file을 불러오는 함수
 * 매계 : 실행 파일(input_file = input.txt)
 * 반환 : 성공 = 0, 실패 = -1
-* 주의 : 
+* 주의 :
 * -----------------------------------------------------------------------------------
 */
 int init_input_file(uchar* input_file) {
@@ -253,17 +251,17 @@ void make_opcode_output(uchar* optable_txt) {
     }
     fprintf(optab_file, "String\t\tFormat\tOP\n\n");
     for (int i = 0; i < inst_index; i++) {
-        for (int j = 0; j <= token_line; j++) { 
+        for (int j = 0; j <= token_line; j++) {
             if (token_table[j] != NULL && token_table[j]->operator != NULL) {
                 char temp_operator[10];
-                strcpy(temp_operator, token_table[j]->operator); 
+                strcpy(temp_operator, token_table[j]->operator);
                 char* plus_position = strchr(temp_operator, '+');
                 if (plus_position != NULL) {
                     memmove(plus_position, plus_position + 1, strlen(plus_position));  // +를 제거
                 }
                 if ((strcmp(temp_operator, inst_table[i]->str) == 0) && (inst_table[i]->format != 0)) {
                     // token_table[j]->operator와 inst_table[i]->str이 동일하면서, format != 0
-                    if (optab_file != NULL){
+                    if (optab_file != NULL) {
                         op_table = (opt*)realloc(op_table, (opt_index + 1) * sizeof(opt));
                         strcpy(op_table[opt_index].str, inst_table[i]->str);
                         op_table[opt_index].op = inst_table[i]->op;
@@ -345,7 +343,7 @@ void make_symtab_output(uchar* symboltable_txt) {
         if (strcmp(buf_symbol_operator, "START") == 0) {
             //START를 만나면
             locctr = start_locctr = strtol(buf_symbol_operand[0], NULL, 16);
-            token_table[i]->locctr = locctr;    
+            token_table[i]->locctr = locctr;
             //문자열 형태로 operand값을 얻어 왔으니, 0에 해당하는 값을 빼면 됨. 
         }
 
@@ -466,7 +464,7 @@ void make_symtab_output(uchar* symboltable_txt) {
 /* -----------------------------------------------------------------------------------
 * 설명 : 시스템의 길이를 측정하는데 도움을 주는 함수
 * 입력 : 현재의 locctr값, 명령을 제어하기 위한 변수 i, 현재의 size
-* 반환 : 
+* 반환 :
 * 주의 : CSECT에선 i값이 1이고, END를 만났다면 i의 값인 2를 입력받을 것임.
 ------------------------------------------------------------------------------------*/
 void locctr_system_history(int now_locctr, int i, int size) {
@@ -507,7 +505,7 @@ void locctr_system_history(int now_locctr, int i, int size) {
 * 설명 : equ에 해당되는 문자열을 받아서 equ 테이블을 구성하는 함수
 * 입력 : equ에 해당하는 str, equ가 있는 라인의 operator인 equ_token_operator
 * 반환 : +, -의 연사늘 마친 결과값
-* 주의 : 
+* 주의 :
 ------------------------------------------------------------------------------------*/
 int equ_token_control(uchar str[20], uchar equ_token_operator) {
     int return_value = 0;
@@ -558,7 +556,8 @@ int equ_token_control(uchar str[20], uchar equ_token_operator) {
 * 설명 : 전달받은 token을 symtab에서 검사하여 addr을 반환하는 함수
 * 입력 : 전달받은 문자, 문자의 section값
 * 반환 : 찾음 : symtab의 locctr값,  못찾음 : -1
-* 주의 : 만약 내가 찾는 section의 위치에 결과가 없으면 자동으ㅗ
+* 주의 : 만약 내가 찾는 section의 위치에 결과가 없으면 자동으로 외부참조일 것이라고 생각하고
+            다른 section들도 조사하는 상황이므로 주의
 ------------------------------------------------------------------------------------*/
 int find_symbol_addr(const char* token, int sec) {
     // sym_table에서 token을 찾아 해당하는 symbol 구조체 반환
@@ -575,14 +574,22 @@ int find_symbol_addr(const char* token, int sec) {
         //만약 찾지 못한다면 외부참조인 것.
         for (int i = 0; i < MAX_LINES; ++i) {
             if (strcmp(token, sym_table[i].symbol) == 0) {
-                 check = 1;
-                 return sym_table[i].addr; //  해당하는 addr 반환
+                check = 1;
+                return sym_table[i].addr; //  해당하는 addr 반환
             }
         }
     }
     return -1; // 찾지 못한 경우 -1 반환
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : locctr값을 계산하여 더해가는 함수
+* 입력 : 전달받은 문자열, 해당 문자열의 token_table[]의 index값
+* 반환 :
+* 주의 :
+------------------------------------------------------------------------------------*/
 void locctr_plus(uchar loc_str[20], int loc_token_line) {
 
     if (loc_str[0] == '+') {
@@ -593,7 +600,7 @@ void locctr_plus(uchar loc_str[20], int loc_token_line) {
     else if (strcmp(loc_str, "RESW") == 0) {
         int resw_loc;
         int n = token_table[loc_token_line]->operand[0][0] - 48;
-        resw_loc = 3 * n;   
+        resw_loc = 3 * n;
         locctr += resw_loc;
     }
     else if (strcmp(loc_str, "LTORG") == 0) {
@@ -613,12 +620,20 @@ void locctr_plus(uchar loc_str[20], int loc_token_line) {
     }
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 전달받은 수의 바이트 사이즈를 확인하는 함수
+* 입력 : 전달받은 문자열, 모드를 관리할 정수 i
+* 반환 : if(i==1) : 작은따음표 사이에 있는 수, else : 작은따음표 사이에 있는 수의 바이트계산 결과
+* 주의 : 작은따음표 사이에 있는 숫자의 바이트 크기가 아닌, 그 수 자체를 반환할때는 i가 1로 들어올 것
+------------------------------------------------------------------------------------*/
 int byte_size_check(uchar input_str[20], int i) {
     // 작은따옴표를 찾기 위한 포인터
     uchar* first_quote = strchr(input_str, '\'');
     uchar* second_quote = NULL;
     uchar result1[2];
-    uchar result2[3]; 
+    uchar result2[3];
     // 첫 번째 따옴표 이후의 문자열에서 두 번째 따옴표 찾기
     if (first_quote != NULL) {
         second_quote = strchr(first_quote + 1, '\'');
@@ -633,7 +648,7 @@ int byte_size_check(uchar input_str[20], int i) {
         strncpy(result2, first_quote + 1, length);
         result2[length] = '\0';
     }
-    if (result1[0] == 'X'){
+    if (result1[0] == 'X') {
         int temp;
         sscanf(result2, "%X", &temp);
         if (i == 1) {
@@ -648,26 +663,39 @@ int byte_size_check(uchar input_str[20], int i) {
     }
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 전달받은 str을 optable에서 검사하여 format을 반환하는 함수
+* 입력 : 전달받은 문자열
+* 반환 : 찾음 : format정보, 못찾음 : -1
+* 주의 :
+------------------------------------------------------------------------------------*/
 int find_format(const uchar loc_str[20]) {
     for (int i = 0; i < opt_index; ++i) {
         if (strcmp((char*)loc_str, (char*)op_table[i].str) == 0) {
             return op_table[i].format;
         }
     }
-    // 찾지 못한 경우, 기본값으로 0을 반환하거나 에러 처리를 수행할 수 있습니다.
+    // 찾지 못한 경우, 기본값으로 -1을 반환하거나 에러 처리를 수행할 수 있.
     return -1;
 }
 
 
-
+/* -----------------------------------------------------------------------------------
+* 설명 : 리터럴에 해당되는 문자열을 받아서 리터럴 테이블을 구성하는 함수
+* 입력 : 전달받은 문자열, 라인 정보
+* 반환 :
+* 주의 : 최초실행시에만 w모드로 파일을 불러오고, 이후로는 a모드로 불러옴.
+------------------------------------------------------------------------------------*/
 void literal_table_make(uchar str[20], int line) {
     //printf("전달받은 문자열 확인: %s\n", str);
     char* file_mode;
     if (literal_count == 0) {
         file_mode = "w";
         literal_count = 1;
-    }   
-    else{
+    }
+    else {
         file_mode = "a";
     }
     FILE* literal_table_file = fopen("literal_table.txt", file_mode);
@@ -693,7 +721,7 @@ void literal_table_make(uchar str[20], int line) {
             }
         }
     }
-    if (global_liter_table == NULL)  
+    if (global_liter_table == NULL)
     {
         global_liter_table = (liter_table*)malloc(MAX_LINES * sizeof(liter_table));
         if (global_liter_table == NULL)
@@ -709,7 +737,7 @@ void literal_table_make(uchar str[20], int line) {
     }
     int isDuplicate = 0;
     for (int i = 0; i < literal_table_line; i++) {
-        if (strcmp(global_liter_table[i].literal, str) == 0){
+        if (strcmp(global_liter_table[i].literal, str) == 0) {
             // 문자열의 중복을 발견했다면
             if (global_liter_table[i].section == section) {
                 isDuplicate = 1;
@@ -754,12 +782,17 @@ void literal_table_make(uchar str[20], int line) {
     fclose(literal_table_file);
     return;
 }
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 리터럴테이블의 구성을 확인하는 함수
+------------------------------------------------------------------------------------*/
 void literal_test(void) {
     int countDig = countDigits(literal_table_line);
     printf("line\t   literal\tsize\trealline\taddr\n");
     printf("------------------------------------\n");
     for (int i = 0; i < literal_table_line; i++) {
-        printf("[%0*d]\t", countDig, i+1);
+        printf("[%0*d]\t", countDig, i + 1);
         printf("%10s,\t", global_liter_table[i].literal);
         printf("%2d,\t", global_liter_table[i].size);
         printf("%2d,\t", global_liter_table[i].LTORG_or_STR_line);
@@ -767,6 +800,12 @@ void literal_test(void) {
     }
     return;
 }
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 각종 정보를 종합적으로 확인해보는 함수.
+* 주의 : 이름은 token_test지만, 내용에는 locctr, opcode, object code의 정보도 가지고 있음.
+------------------------------------------------------------------------------------*/
 void token_test(void) {
     //토큰화 작업을 확인하는 함수임
     int countDig = countDigits(token_line);
@@ -775,10 +814,10 @@ void token_test(void) {
     for (int i = 0; i < token_line; i++) {
         //밑은 line 출력문
         printf("[%0*d]\t", countDig, i + 1);
-        if(token_table[i]->object_code != NULL){
+        if (token_table[i]->object_code != NULL) {
             printf("%-8X\t", token_table[i]->object_code);
         }
-        else{
+        else {
             printf("\t\t");
         }
 
@@ -837,6 +876,13 @@ void token_test(void) {
     return;
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 출력문의 자릿수 맞춤을 위해 숫자의 자릿수를 파악하는 함수
+* 입력 : 전달받은 숫자
+* 주의 : 어셈블러 기능과는 무관.
+------------------------------------------------------------------------------------*/
 int countDigits(int number) {
     // 예외 처리: 음수를 양수로 변환하여 계산
     if (number < 0) {
@@ -857,9 +903,15 @@ int countDigits(int number) {
         digitCount++;  // 자릿수 증가
     }
 
-    return digitCount;  
+    return digitCount;
 }
 
+
+/* -----------------------------------------------------------------------------------
+* 설명 : intermediate 파일을 만드는 함수
+* 입력 : line값과, locctr값
+* 주의 : 최초실행시에만 w모드로 파일을 불러오고, 이후로는 a모드로 불러옴.
+------------------------------------------------------------------------------------*/
 void make_intermediate(int line, int loc) {
     char* file_mode;
     if (intermediate_count == 0) {
@@ -900,6 +952,12 @@ void make_intermediate(int line, int loc) {
     fclose(im_file);
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : section이 끝날때마다 locctr값을 가지고 와서 시스템 길이를 더해가는 역할
+* 입력 : 전달받은 locctr값.
+------------------------------------------------------------------------------------*/
 void program_length(int end_locctr) {
     int temp = end_locctr - start_locctr;
     system_program_length += temp;
@@ -913,6 +971,16 @@ static int assem_pass2(void) {
     return;
 }
 
+
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 최종 결과물을 만드는 함수
+* 출력 : final_txt(final_txt)
+* 반환 :
+* 주의 : token_table의 구조체를 직접 활용시 에러가 발생하여 이역시 버퍼를 만들어 여기에 복사하고 작업함
+
+* -----------------------------------------------------------------------------------*/
 void make_final_output(uchar* final_txt) {
     FILE* final_file = fopen(final_txt, "w");
     if (final_file == NULL) {
@@ -981,7 +1049,7 @@ void make_final_output(uchar* final_txt) {
 
         if (strcmp(buf_operator, "EXTDEF") == 0) {
             for (int j = 0; j < MAX_OPERAND; j++) {
-                if (buf_operand[j][0] != '!'){
+                if (buf_operand[j][0] != '!') {
                     strcpy(buf_extdef[j], buf_operand[j]);
                 }
                 else {
@@ -1010,7 +1078,7 @@ void make_final_output(uchar* final_txt) {
             check_ref = 1;
         }
 
-        else{
+        else {
             if (first_line_check == 0) {
                 //파일의 시작이 아니라면
                 if (def_ref_procedure > 0) {
@@ -1032,8 +1100,8 @@ void make_final_output(uchar* final_txt) {
                             //EXTREF가 있었다면
                             fprintf(final_file, "R");
                             for (int j = 0; j < MAX_OPERAND; j++) {
-                                if (buf_extref[j][0] != '!') { 
-                                    fprintf(final_file, "%s ", buf_extref[j]); 
+                                if (buf_extref[j][0] != '!') {
+                                    fprintf(final_file, "%s ", buf_extref[j]);
                                 }
                             }
                             fprintf(final_file, "\n");
@@ -1069,12 +1137,12 @@ void make_final_output(uchar* final_txt) {
                     check_ref = 0;
                     def_ref_procedure = 0;
                 }
-                else if ((strcmp(buf_operator, "CSECT") == 0) || (strcmp(buf_operator, "END") == 0) ){
-                    first_line_check = 1;   
+                else if ((strcmp(buf_operator, "CSECT") == 0) || (strcmp(buf_operator, "END") == 0)) {
+                    first_line_check = 1;
                     //다시 파일이 처음 시작이란 것을 안내해줌.
                     check_def = 0;
                     fprintf(final_file, "E");
-                    if (sec==0){
+                    if (sec == 0) {
                         fprintf(final_file, "%06X", start_locctr);
                     }
                     fprintf(final_file, "\n\n");
@@ -1085,7 +1153,7 @@ void make_final_output(uchar* final_txt) {
                         break;
                     }
                 }
-                else{
+                else {
 
                 }
             }
@@ -1102,7 +1170,17 @@ void make_final_output(uchar* final_txt) {
     }
     fclose(final_file);
 }
-void make_objectcode_output(uchar* object_txt){
+
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : objectcode를 계산하고, txt파일로 출력하는 함수
+* 출력 : object_txt(object_txt)
+* 반환 :
+* 주의 : token_table의 구조체를 직접 활용시 에러가 발생하여 이역시 버퍼를 만들어 여기에 복사하고 작업함
+
+* -----------------------------------------------------------------------------------*/
+void make_objectcode_output(uchar* object_txt) {
     FILE* object_file = fopen(object_txt, "w");
     if (object_file == NULL) {
         printf("object.txt 파일을 만들 수 없습니다.\n");
@@ -1112,7 +1190,7 @@ void make_objectcode_output(uchar* object_txt){
     int countDig = countDigits(token_line);
     int object_line = 0;
     int start_check = 0;
-        //start를 만나면 값을 바꿔서 이후에 있는 라인들만 코드가 작동되도록 하는 것.
+    //start를 만나면 값을 바꿔서 이후에 있는 라인들만 코드가 작동되도록 하는 것.
     int buf_format;
     int buf_opcode;
     uchar buf_objectcode_operator[8];
@@ -1158,13 +1236,13 @@ void make_objectcode_output(uchar* object_txt){
                 size_t length_to_copy = sizeof(buf_objectcode_operand[j]) - 1;
                 strncpy(buf_objectcode_operand[j], token_table[i]->operand[j], length_to_copy);
                 buf_objectcode_operand[j][length_to_copy] = '\0';  // Null 종료 문자 추가
-               // printf("%d:%s\t", j, buf_objectcode_operand[j]);
+                // printf("%d:%s\t", j, buf_objectcode_operand[j]);
             }
             else {
                 buf_objectcode_operand[j][0] = '!';  // '\0' 추가
             }
             if (j == 2) {
-               // printf("\n\n");
+                // printf("\n\n");
             }
         }
 
@@ -1221,6 +1299,7 @@ void make_objectcode_output(uchar* object_txt){
                     }
                     break;
                 case(1):
+                    //foramt 1
                     //format 1인 경우의 object_code는 opcode 1byte(=8bit) 그대로 씀.
                     hex_binary_table[i].format = 1;
                     decimalToBinary(buf_opcode, i, 1);
@@ -1228,11 +1307,13 @@ void make_objectcode_output(uchar* object_txt){
                     break;
 
                 case(2):
+                    //foramt 2
                     int register_1;
                     int register_2;
                     uchar temp_str_1[] = { buf_objectcode_operand[0][0] };
                     uchar temp_str_2[] = { buf_objectcode_operand[1][0] };
 
+                    //밑에는 작성된 프로그램의 레지스터를 확인하는 과정임.
                     if (temp_str_1[0] == 'X') {
                         register_1 = 1;
                     }
@@ -1287,6 +1368,7 @@ void make_objectcode_output(uchar* object_txt){
 
 
                 case(3):
+                    //foramt 3
                     hex_binary_table[i].format = 3;
                     int found_operator_locctr = token_table[i]->locctr;
                     int found_operand_Addr[MAX_OPERAND];
@@ -1312,7 +1394,7 @@ void make_objectcode_output(uchar* object_txt){
                             if (n > 0) {
                                 litter_locctr = token_table[n]->locctr;
                             }
-                            else if(n < 0) {
+                            else if (n < 0) {
                                 int temp = -n;
                                 temp--;
                                 n = temp;
@@ -1353,7 +1435,7 @@ void make_objectcode_output(uchar* object_txt){
                                 xbpe_of_nixbpe(xbpe, i);
                                 //b에 1을 대입.
                             }
-                            else if ((locctr_overflowr_check < 4096) && (locctr_overflowr_check >= 0)){
+                            else if ((locctr_overflowr_check < 4096) && (locctr_overflowr_check >= 0)) {
                                 //미발생한 양수
                                 xbpe[2] = 1;
                                 temp = 2;
@@ -1368,20 +1450,20 @@ void make_objectcode_output(uchar* object_txt){
                         }
                         else if (buf_objectcode_operand[0][0] == '#') {
                             //#이 즉시주소로 #의 뒤에 있는 것을 사용함. object = op + 1
-                            int temp = (int)buf_objectcode_operand[0][1]; 
+                            int temp = (int)buf_objectcode_operand[0][1];
                             //temp에 buf_objectcode_operand[0][1]의 아스키코드가 저장됨.
                             decimalToBinary(buf_opcode + 1, i, 3);
                             xbpe_of_nixbpe(xbpe, i);
                             //x, b, p, e에 0을 대입.
                             hex_binary_table[i].ob = ((buf_opcode + 1) << 16);
-                            if (temp < 65){
+                            if (temp < 65) {
                                 //temp에 숫자가 아스키코드로 들어 있음.
                                 temp -= 48;
                                 //아크키코드 값을 빼서 실제 1의자리 정수로 만들어줌.
                                 decimalToBinary(temp, i, 7);
                                 hex_binary_table[i].ob += temp;
                             }
-                            else if (temp == 65)  {
+                            else if (temp == 65) {
                                 //temp = A = 10(10) = 1010
                                 int A = 10;
                                 decimalToBinary(A, i, 7);
@@ -1452,7 +1534,7 @@ void make_objectcode_output(uchar* object_txt){
                                 temp = 2;
                                 //2(10) = 0010(2)
                             }
-                            else{    
+                            else {
                                 //결과가 음수..
                                 int t = -locctr_overflowr_check;
                                 xbpe[2] = 1;
@@ -1475,6 +1557,7 @@ void make_objectcode_output(uchar* object_txt){
                     //format 3종료
 
                 case(4):
+                    //foramt 4
                     decimalToBinary(buf_opcode + 3, i, 4);
                     hex_binary_table[i].format = 4;
                     if (buf_objectcode_operator[0] == '+') {
@@ -1519,10 +1602,10 @@ void make_objectcode_output(uchar* object_txt){
             if (hex_binary_table[i].format == -1) {
                 fprintf(object_file, " \n");
             }
-            else{
+            else {
                 if ((hex_binary_table[i].format == 0) || (hex_binary_table[i].format == 1) || (hex_binary_table[i].format == 2)) {
                     //format 0, 1, 2
-                    if (hex_binary_table[i].format == 0){
+                    if (hex_binary_table[i].format == 0) {
                         fprintf(object_file, "%2X       : \t", hex_binary_table[i].ob);
                     }
                     else if (hex_binary_table[i].format == 1) {
@@ -1591,7 +1674,7 @@ void make_objectcode_output(uchar* object_txt){
                     }
                 }
             }
-            
+
         }
         else {
             if (strcmp(buf_objectcode_operator, "START") == 0) {
@@ -1604,6 +1687,16 @@ void make_objectcode_output(uchar* object_txt){
     return;
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : optable에서 str을 통해 opcode를 찾아내는 함수
+* 입력 : 문자열
+* 출력 :
+* 반환 : 리터럴이 실제 존재하는 위치의 line
+* 주의 : line을 반환하는 것이지. 이게 locctr값을 반환하는게 아니므로 추가로 해당 라인의 locctr값을 확인 필요
+        이유 : symtable를 구성하는 과정에서(즉, 완성되기 전) 해당 작업을 하므로, locctr값은 아직 알 수 없기 때문.
+* -----------------------------------------------------------------------------------*/
 int found_litter_index(uchar str[10]) {
     for (int i = 0; i < literal_table_line; ++i) {
         if (strstr(global_liter_table[i].literal, str) != NULL) {
@@ -1612,14 +1705,30 @@ int found_litter_index(uchar str[10]) {
     }
 }
 
+
+/* -----------------------------------------------------------------------------------
+* 설명 : 배열 nixbpe에서, xbpe에 값을 넣는 함수
+* 입력 : 정수 4개와 hex_binary_table의 index값
+* 출력 :
+* 반환 :
+* 주의 : 이는 그저 기능 테스트용으로, 해당 기능이 없어도 어셈블러에는 무관
+* -----------------------------------------------------------------------------------*/
 void xbpe_of_nixbpe(int xbpe[4], int line) {
     for (int j = 2; j < 6; j++) {
-        hex_binary_table[line].nixbpe[j] = xbpe[j-2];
+        hex_binary_table[line].nixbpe[j] = xbpe[j - 2];
     }
 }
 
+/* -----------------------------------------------------------------------------------
+* 설명 : hex_binary_table이라는 구조체에 2진수로 변환하여 값을 넣는 역할
+* 입력 : 변환할 숫자, 구조체의 index값, mode의 역할을 진행할 정수
+* 출력 :
+* 반환 :
+* 주의 : 이는 그저 기능 테스트용으로, 해당 기능이 없어도 어셈블러에는 무관
+         변수이름이 format으로 되어 있지만, 이는 그저 모드(역할)의 구분을 위한 것.
+* -----------------------------------------------------------------------------------*/
 void decimalToBinary(int decimal, int line, int format) {
-    if(format < 5){
+    if (format < 5) {
         int binaryArray[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
         for (int j = 7; j >= 0; j--) {
             binaryArray[j] = decimal % 2;
@@ -1667,17 +1776,17 @@ void decimalToBinary(int decimal, int line, int format) {
                 decimal /= 2;
             }
         }
-        else if (decimal < 0){
+        else if (decimal < 0) {
             unsigned int positiveValue = (unsigned int)(-decimal);
             unsigned int twoComplement = positiveValue ^ 0xFFFFFFFF;
             twoComplement += 1;
             for (int i = 11; i >= 0; i--) {
                 int bit = (twoComplement >> i) & 1;
-                hex_binary_table[line].disp_1[11 - i] = bit;    
+                hex_binary_table[line].disp_1[11 - i] = bit;
             }
         }
     }
-    else if ((format == 8) || (format == 9)){
+    else if ((format == 8) || (format == 9)) {
         //format2에서 레지스터에 값을 넣는 것.
         int binaryArray4[4] = { 0, 0, 0, 0 };
         for (int j = 3; j >= 0; j--) {
@@ -1695,6 +1804,15 @@ void decimalToBinary(int decimal, int line, int format) {
     }
 }
 
+
+
+/* -----------------------------------------------------------------------------------
+* 설명 : optable에서 str을 통해 opcode를 찾아내는 함수
+* 입력 : 검색할 문자열
+* 출력 :
+* 반환 : 성공 : op값, 실패 :0
+* 주의 : format4에서 +가 있는 경우, 여기선 +를 제외하고 opcode를 검색시킴.
+* -----------------------------------------------------------------------------------*/
 int find_opcode(const char* str1) {
     int err = 0;
 

@@ -1,44 +1,44 @@
 ﻿  my_assembler_20194380.c
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(56,60): warning C4477: 'fscanf' : 서식 문자열 '%02X'에 'unsigned int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'uchar *'입니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(56,60): message : 서식 문자열에서 '%hhX'을(를) 사용하는 것이 좋습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(107,22): warning C4047: '=': 'uchar'의 간접 참조 수준이 'uchar *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(149,50): warning C4305: '=': 'int'에서 'uchar'(으)로 잘립니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(164,9): warning C4033: 'token_parsing'은(는) 값을 반환해야 합니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(181,16): warning C4133: '함수': 'FILE *'과(와) 'const char *const ' 사이의 형식이 호환되지 않습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(184,15): warning C4047: '=': 'char **'의 간접 참조 수준이 'char *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(185,37): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(185,37): warning C4024: 'strchr': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(188,42): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(188,42): warning C4024: 'strchr': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(199,36): warning C4047: '함수': 'char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(199,36): warning C4024: 'strtok': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(209,58): warning C4305: '=': 'int'에서 'uchar'(으)로 잘립니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(237,5): warning C4047: 'return': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(252,18): warning C4098: 'make_opcode_output': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(284,13): warning C4098: 'make_opcode_output': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(300,18): warning C4098: 'make_symtab_output': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(335,42): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'uchar (*)[20]'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(335,42): warning C4024: 'strcpy': 형식 및 실제 매개 변수 2의 형식이 서로 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(462,13): warning C4098: 'make_symtab_output': 'void' 함수에서 값을 반환하고 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(307,9): warning C4101: 'bufend_loctr' :참조되지 않은 지역 변수입니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(306,9): warning C4101: 'buffer_locctr' :참조되지 않은 지역 변수입니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(494,24): warning C4087: 'program_length': 'void' 매개 변수 목록을 사용하여 선언되었습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(500,31): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(525,40): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(606,51): warning C4020: 'byte_size_check': 실제 매개 변수가 너무 많습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(616,49): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(647,16): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(722,13): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(778,40): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(794,36): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(903,37): warning C4027: 정식 매개 변수 목록을 사용하지 않고 함수를 선언했습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(913,5): warning C4033: 'assem_pass2'은(는) 값을 반환해야 합니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1173,37): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1189,44): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1481,71): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1124,9): warning C4101: 'buffer_locctr' :참조되지 않은 지역 변수입니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(232): warning C4715: 'token_parsing': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(649): warning C4715: 'byte_size_check': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1613): warning C4715: 'found_litter_index': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(914): warning C4716: 'assem_pass2': 값을 반환해야 합니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(54,60): warning C4477: 'fscanf' : 서식 문자열 '%02X'에 'unsigned int *' 형식의 인수가 필요하지만 variadic 인수 4의 형식이 'uchar *'입니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(54,60): message : 서식 문자열에서 '%hhX'을(를) 사용하는 것이 좋습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(105,22): warning C4047: '=': 'uchar'의 간접 참조 수준이 'uchar *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(147,50): warning C4305: '=': 'int'에서 'uchar'(으)로 잘립니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(162,9): warning C4033: 'token_parsing'은(는) 값을 반환해야 합니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(179,16): warning C4133: '함수': 'FILE *'과(와) 'const char *const ' 사이의 형식이 호환되지 않습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(182,15): warning C4047: '=': 'char **'의 간접 참조 수준이 'char *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(183,37): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(183,37): warning C4024: 'strchr': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(186,42): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(186,42): warning C4024: 'strchr': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(197,36): warning C4047: '함수': 'char *'의 간접 참조 수준이 'char **'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(197,36): warning C4024: 'strtok': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(207,58): warning C4305: '=': 'int'에서 'uchar'(으)로 잘립니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(235,5): warning C4047: 'return': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(250,18): warning C4098: 'make_opcode_output': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(282,13): warning C4098: 'make_opcode_output': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(298,18): warning C4098: 'make_symtab_output': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(333,42): warning C4047: '함수': 'const char *'의 간접 참조 수준이 'uchar (*)[20]'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(333,42): warning C4024: 'strcpy': 형식 및 실제 매개 변수 2의 형식이 서로 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(460,13): warning C4098: 'make_symtab_output': 'void' 함수에서 값을 반환하고 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(305,9): warning C4101: 'bufend_loctr' :참조되지 않은 지역 변수입니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(304,9): warning C4101: 'buffer_locctr' :참조되지 않은 지역 변수입니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(492,24): warning C4087: 'program_length': 'void' 매개 변수 목록을 사용하여 선언되었습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(498,31): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(523,40): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(613,51): warning C4020: 'byte_size_check': 실제 매개 변수가 너무 많습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(631,49): warning C4029: 선언된 정식 매개 변수 목록이 정의와 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(662,16): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(750,13): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(817,41): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(833,36): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(961,37): warning C4027: 정식 매개 변수 목록을 사용하지 않고 함수를 선언했습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(971,5): warning C4033: 'assem_pass2'은(는) 값을 반환해야 합니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1251,37): warning C4047: '=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1267,44): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1564,71): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1202,9): warning C4101: 'buffer_locctr' :참조되지 않은 지역 변수입니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(230): warning C4715: 'token_parsing': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(664): warning C4715: 'byte_size_check': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(1706): warning C4715: 'found_litter_index': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\my_assembler_20194380.c(972): warning C4716: 'assem_pass2': 값을 반환해야 합니다.
   sol_assem.vcxproj -> C:\Users\JeongJin\Desktop\과제1_문정진_20194380\source\x64\Debug\sol_assem.exe
