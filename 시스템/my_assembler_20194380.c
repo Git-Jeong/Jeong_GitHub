@@ -4,14 +4,14 @@
     20194380 문정진
 */
 #define _CRT_SECURE_NO_WARNINGS	
-#include <stdio.h>
+#include <stdio.h>  
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
 #include "my_assembler_20194380.h"
 
-int main(void) {
+    int main(void) {
     init_my_assembler();
     assem_pass1();
     assem_pass2();
@@ -1003,6 +1003,7 @@ void make_final_output(uchar* final_txt) {
     uchar buf_extdef[MAX_OPERAND][20];
     uchar buf_extref[MAX_OPERAND][20];
     int def_ref_procedure = 0;
+    int final_line_contr = 0;
     //def와 ref중 무엇이 먼저 왔는지 확인하는 변수.
     for (int i = 0; i < token_line; i++) {
         //반복문을 token_line까지 반복
@@ -1141,7 +1142,8 @@ void make_final_output(uchar* final_txt) {
                     first_line_check = 1;
                     //다시 파일이 처음 시작이란 것을 안내해줌.
                     check_def = 0;
-                    fprintf(final_file, "E");
+                    final_line_contr = 0;
+                    fprintf(final_file, "\nE");
                     if (sec == 0) {
                         fprintf(final_file, "%06X", start_locctr);
                     }
@@ -1153,8 +1155,32 @@ void make_final_output(uchar* final_txt) {
                         break;
                     }
                 }
-                else {
 
+                else {
+                    if (final_line_contr == 0) {
+                        fprintf(final_file, "T");
+                    }
+                    else if (final_line_contr > 50) {
+                        fprintf(final_file, "\nT");
+                        final_line_contr = 0;
+                    }
+
+                    if (buf_format == 4) {
+                        fprintf(final_file, "%8X", token_table[i]->object_code);
+                        final_line_contr += 8;  //8*4=32
+                    }
+                    else if (buf_format == 3) {
+                        fprintf(final_file, "%06X", token_table[i]->object_code);
+                        final_line_contr += 6;  //8*4=32
+                    }
+                    else if (buf_format == 2) {
+                        fprintf(final_file, "%04X", token_table[i]->object_code);
+                        final_line_contr += 4;  //8*4=32
+                    }
+                    else if (buf_format == 1) {
+                        fprintf(final_file, "%02X", token_table[i]->object_code);
+                        final_line_contr += 2;  //8*4=32
+                    }
                 }
             }
             else if (first_line_check == 1) {
