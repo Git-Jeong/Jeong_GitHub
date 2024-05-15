@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPT 서비스</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+   
+    .header{
+      font-weight: bold; /* 굵은 글자 */
+      background-color: yellow; /* 배경색 설정 */
+      padding: 10px; /* 내용과 경계 사이의 여백 */
+    }
+
+    .center {
+        text-align: center; /* 가로 중앙 정렬 */
+    }
+
+    .right {
+        text-align: right; /* 가로 우측 정렬 */
+    }
+
+</style>
+</head>
+<body>
+  <header class="header">
+    <div class="center">
+      <p>react navbar를 쓸 공간</p>
+  </div>
+  <div class="right">
+      <p>로그인/로그아웃</p>
+  </div>
+  </header>
+
+  <main class="main-section">
+    <div class="ChatList">MongoDB에서 대화기록을 가지고 올 공간</div>
+
+    <div class="chat-container">
+      <div class="chat-input-container" id="chatApp"> <!-- ChatBox 컴포넌트를 렌더링할 위치 -->
+      </div>
+    </div>
+  </main>
+
+<footer class="footer">
+  <p>&copy; GPT 서비스.</p>
+  <nav>
+    <a href="#">이용 약관</a>
+    <a href="#">연락처</a>
+  </nav>
+</footer>  
+
+<script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@^6.26.0/babel.min.js"></script>
+<script type="text/babel">
+    // ChatBox 컴포넌트의 JavaScript 코드
+    const { useState } = React;
+
+    const ChatBox = ({ sendMessage }) => {
+        const [message, setMessage] = useState('');
+
+        const handleMessageChange = (event) => {
+            setMessage(event.target.value);
+        };
+
+        const sendMessageToChatList = () => {
+            if (message.trim() === '') return;
+            sendMessage(message);
+            setMessage('');
+        };
+
+        const handleKeyPress = (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessageToChatList();
+            }
+        };
+
+        return (
+            <div className="chat-input-container">
+                <textarea
+                    value={message}
+                    onChange={handleMessageChange}
+                    onKeyPress={handleKeyPress}
+                    placeholder="메시지를 입력하세요..."
+                    className="chat-container"
+                />
+                <button onClick={sendMessageToChatList} className="chat-box-button">전송</button>
+            </div>
+        );
+    };
+
+    // ChatBox 컴포넌트를 #chatApp 요소에 렌더링
+    const rootElement = document.getElementById("chatApp");
+    ReactDOM.render(<ChatBox />, rootElement);
+</script>
+</body>
+</html>
