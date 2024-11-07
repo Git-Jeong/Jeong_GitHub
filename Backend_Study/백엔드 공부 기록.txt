@@ -1,0 +1,20 @@
+먼저 backend에서
+npm install express
+npm install --save-dev nodemon
+를 설치
+
+vs에서 REST Client라는 익스텐션도 설치
+
+package.json에서
+  "type": "module"
+를 추가  //이게 있어야 import, export같은 것들을 사용 가능함
+
+
+nodemon을 사용하려면
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  }
+를 package.json에 추가
+이를 통해 npm run dev로 서버를 실행할 수 있음
+//이걸 안 적으면 node app.js로 서버를 시작!

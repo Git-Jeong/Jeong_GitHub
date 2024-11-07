@@ -1,0 +1,39 @@
+###
+GET http://localhost:3000/hello
+//Hello Express출력
+
+###
+GET http://localhost:3000/tasks
+//전부 출력
+
+###
+GET http://localhost:3000/tasks?sort=oldest&count=3
+//oldest 정렬 후 3개만 출력
+
+###
+GET http://localhost:3000/tasks/1
+//끝에 있는 ID를 기반으로 해당하는 것을 찾아줌
+
+###
+POST http://localhost:3000/tasks
+//새로운 할 일을 추가하는 것
+Content-Type: application/json
+
+{
+    "title" : "강아지 산책",
+    "description" : "강아지랑 30분 산책하기"
+}
+
+###
+PATCH  http://localhost:3000/tasks/1
+//값을 바꾸는 것
+Content-Type: application/json
+
+{
+    "title": "100분 운동",
+    "isComplete" : "true"
+}
+
+###
+DELETE http://localhost:3000/tasks/1
+//id를 가지고 값을 지우는 것
